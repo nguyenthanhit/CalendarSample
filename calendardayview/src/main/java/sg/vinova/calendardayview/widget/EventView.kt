@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.RelativeLayout
 import kotlinx.android.synthetic.main.view_event.view.*
 import sg.vinova.calendardayview.R
 import sg.vinova.calendardayview.event.IEvent
@@ -44,11 +45,6 @@ class EventView : FrameLayout {
 
         LayoutInflater.from(context).inflate(R.layout.view_event, this, true)
 
-        setOnClickListener {
-            return@setOnClickListener
-        }
-
-
         eventContainer.setOnTouchListener { view, motionEvent ->
             when (motionEvent.action) {
                 MotionEvent.ACTION_DOWN -> {
@@ -73,14 +69,13 @@ class EventView : FrameLayout {
             val y = motionEvent.rawY
             val location = IntArray(2)
             tvEvent.getLocationOnScreen(location)
-            val totalEventY = tvEvent.height + location[1] + ScreenUtils.dpToPx(24)
-
-            Log.d("Thanh", " totalEventY = ${totalEventY} $$ y = ${y}")
+            val totalEventY = tvEvent.height + location[1]
 
             if ((totalEventY - y in 1..50) || (
                             y - totalEventY >= 50 && y - totalEventY > 0)) {
                 when (motionEvent.action) {
                     MotionEvent.ACTION_MOVE -> {
+                       // update height event
                         tvEvent.layoutParams.height += (y - totalEventY).toInt()
                         tvEvent.requestLayout()
                     }
@@ -91,7 +86,6 @@ class EventView : FrameLayout {
             }
             true
         }
-
 
         ivTopArrow.setOnTouchListener { view, motionEvent ->
             Log.d("Thanh", "Up up up up ")
@@ -115,7 +109,7 @@ class EventView : FrameLayout {
 
         eventContainer.apply {
             (layoutParams as FrameLayout.LayoutParams).apply {
-                this.topMargin = rect.top
+                this.topMargin = rect.top - ScreenUtils.dpToPx(24)
             }
         }
     }

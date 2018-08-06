@@ -11,5 +11,9 @@
     <dimen name="small_margin">8dp</dimen>
     <dimen name="normal_margin">16dp</dimen>
     <dimen name="arrow_margin">-8dp</dimen>
+    
+    //padding
+    <dimen name="smallest_padding">6dp</dimen>
+    <dimen name="small_padding">8dp</dimen>
 
 </resources>

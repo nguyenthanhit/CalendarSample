@@ -95,6 +95,7 @@ class CalendarDayView : FrameLayout, IEvent {
 
 
     override fun onBeginMoveEvent() {
+        // prevent show add new event view when moving existed event
         eventContainer.setOnClickListener {
             return@setOnClickListener
         }
@@ -103,7 +104,6 @@ class CalendarDayView : FrameLayout, IEvent {
     override fun onStopMoveEvent() {
         eventContainer.isClickable = false
     }
-
 
     fun setLimitTime(startHour: Int, endHour: Int) {
         mStartHour = startHour

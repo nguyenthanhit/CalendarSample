@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         timeEnd.set(Calendar.HOUR_OF_DAY, 3)
         timeEnd.set(Calendar.MINUTE, 30)
         val event = Event(1, timeStart, timeEnd, "Event", "Hockaido",
-                color = ContextCompat.getColor(this, R.color.md_deep_orange_300_dark))
+                color = ContextCompat.getColor(this, R.color.blue_55))
 
         events.add(event)
 
