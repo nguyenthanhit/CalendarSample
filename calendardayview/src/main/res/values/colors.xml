@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="light_gray">#f0f0f0</color>
+    <color name="md_deep_orange_300_dark">#c7ff6b3c</color>
+    <color name="white">#ffff</color>
+    <color name="md_pink_300_dark">#c8f2568b</color>
+    <color name="blue_55">#553fa9eb</color>
+    <color name="gray">#55687278</color>
+
+</resources>

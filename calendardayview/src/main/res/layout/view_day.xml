@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/dayParentView"
+    android:layout_height="@dimen/dayHeight">
+
+    <TextView
+        android:id="@+id/tvHour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/small_margin"
+        android:textSize="@dimen/normal_text_size"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Noon" />
+
+    <View
+        android:id="@+id/vwDivider"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dividerHeight"
+        android:layout_marginEnd="@dimen/small_margin"
+        android:layout_marginStart="@dimen/normal_margin"
+        android:background="@color/light_gray"
+        app:layout_constraintBottom_toBottomOf="@id/tvHour"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvHour"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvAddNewEvent"
+        android:layout_width="0dp"
+        android:layout_marginEnd="@dimen/small_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        android:background="@color/md_deep_orange_300_dark"
+        app:layout_constraintTop_toTopOf="@id/vwDivider"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/vwDivider"
+        android:text="@string/new_event"
+        android:textColor="@color/white"
+        android:drawableStart="@drawable/ic_add_new"
+        android:gravity="center_vertical"
+        android:layout_height="0dp" />
+
+</android.support.constraint.ConstraintLayout>

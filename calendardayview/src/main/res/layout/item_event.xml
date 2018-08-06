@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue_55"
+    android:gravity="top|start"
+    android:padding="@dimen/small_margin"
+    android:textSize="@dimen/medium_text_size"
+    android:id="@+id/tvEvent"
+    android:textColor="@color/white" />
+
+    <!--<TextView-->
+        <!--android:id="@+id/tvEvent"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@id/ivTopArrow"-->
+        <!--android:layout_marginTop="@dimen/arrow_margin"-->
+        <!--android:background="@color/blue_55"-->
+        <!--android:gravity="top|start"-->
+        <!--android:padding="@dimen/small_margin"-->
+        <!--android:textColor="@color/white"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent" />-->
