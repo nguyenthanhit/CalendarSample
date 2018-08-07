@@ -1,5 +1,6 @@
 package sg.vinova.calendardayview.event
 
+import android.view.View
 import sg.vinova.calendardayview.model.Event
 
 /* *
@@ -9,4 +10,7 @@ import sg.vinova.calendardayview.model.Event
 interface IEvent {
     fun onBeginMoveEvent()
     fun onStopMoveEvent()
+    fun onFocus(view: View)
+    fun onLongClickEvent()
+    fun onFocusOutSide()
 }

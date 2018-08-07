@@ -2,29 +2,33 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/root"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!--<ScrollView-->
-        <!--android:id="@+id/scrollView"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:clipToPadding="false"-->
-        <!--android:background="#FFF"-->
-        <!--android:paddingTop="@dimen/dayHeight"-->
-        <!--&gt;-->
+    <sg.vinova.calendardayview.widget.CustomScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFF"
+        android:clipToPadding="false"
+        android:paddingTop="@dimen/dayHeight"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
         <sg.vinova.calendardayview.widget.CalendarDayView
             android:id="@+id/calendarView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:endHour="@integer/end_hour"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:startHour="@integer/start_hour"
-            app:endHour="@integer/end_hour"/>
+            app:startHour="@integer/start_hour" />
 
 
-    <!--</ScrollView>-->
+    </sg.vinova.calendardayview.widget.CustomScrollView>
 
 </android.support.constraint.ConstraintLayout>

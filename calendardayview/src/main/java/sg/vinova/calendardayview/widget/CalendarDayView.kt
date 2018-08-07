@@ -5,21 +5,29 @@ import android.graphics.Rect
 import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.FrameLayout
 import kotlinx.android.synthetic.main.view_day_calendar.view.*
 import org.joda.time.DateTime
 import sg.vinova.calendardayview.R
+import sg.vinova.calendardayview.R.id.dayViewContainer
+import sg.vinova.calendardayview.R.id.eventContainer
 import sg.vinova.calendardayview.event.IEvent
 import sg.vinova.calendardayview.helper.Formatter
 import sg.vinova.calendardayview.helper.ScreenUtils
 import sg.vinova.calendardayview.model.Event
 import java.util.*
+import android.view.MotionEvent
+import android.widget.ScrollView
+import sg.vinova.calendardayview.R.color.white
+
 
 /* *
  *  Created by JAY on 01/08/2018
  */
 
 class CalendarDayView : FrameLayout, IEvent {
+
 
     private var mDayHeight = 0
 
@@ -131,6 +139,7 @@ class CalendarDayView : FrameLayout, IEvent {
             eventView.setEvent(event, rect)
             eventView.setPosition(rect)
             eventContainer.addView(eventView, eventView.layoutParams)
+            disableTouchTheft(eventView)
 
         }
     }
@@ -149,4 +158,37 @@ class CalendarDayView : FrameLayout, IEvent {
         val minute = calendar.get(Calendar.MINUTE)
         return hour * mDayHeight + minute * mDayHeight / 60
     }
+
+    override fun onFocus(view: View) {
+        listener?.onFocusInside(view)
+    }
+    override fun onLongClickEvent() {
+        listener?.onLongClickEvent()
+    }
+
+    override fun onFocusOutSide() {
+        listener?.onFocusScrollView()
+    }
+    var listener : CalendarDayViewListener? = null
+
+}
+
+fun disableTouchTheft(view: View) {
+    view.setOnTouchListener { view, motionEvent ->
+        var parent = view.parent
+        while(view.parent !is ScrollView){
+            parent = parent.parent
+        }
+        parent?.requestDisallowInterceptTouchEvent(true)
+        when (motionEvent.action and MotionEvent.ACTION_MASK) {
+            MotionEvent.ACTION_UP -> view.parent.requestDisallowInterceptTouchEvent(false)
+        }
+        false
+    }
+}
+interface CalendarDayViewListener{
+    fun onFocusInside(view: View)
+    fun onFocusScrollView()
+    fun onLongClickEvent()
+
 }

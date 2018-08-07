@@ -1,5 +1,6 @@
 package sg.vinova.calendardayview.widget
 
+import android.content.ClipData
 import android.content.Context
 import android.graphics.Rect
 import android.util.AttributeSet
@@ -11,6 +12,7 @@ import android.widget.FrameLayout
 import android.widget.RelativeLayout
 import kotlinx.android.synthetic.main.view_event.view.*
 import sg.vinova.calendardayview.R
+import sg.vinova.calendardayview.R.id.*
 import sg.vinova.calendardayview.event.IEvent
 import sg.vinova.calendardayview.helper.ScreenUtils
 import sg.vinova.calendardayview.model.Event
@@ -63,7 +65,18 @@ class EventView : FrameLayout {
             }
             true
         }
+        eventContainer.setOnLongClickListener{v ->
+            eventListener.onLongClickEvent()
 
+            v.startDrag(ClipData.newPlainText("test", "test"),  DragShadowBuilder(v),null, 0)
+            true
+        }
+        eventContainer?.setOnFocusChangeListener{ v, b ->
+            if(v !is EventView)
+                eventListener.onFocusOutSide()
+            else
+                eventListener.onFocus(v)
+        }
         ivDownArrow.setOnTouchListener { view, motionEvent ->
 
             val y = motionEvent.rawY
