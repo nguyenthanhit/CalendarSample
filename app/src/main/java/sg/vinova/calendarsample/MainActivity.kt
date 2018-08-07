@@ -27,16 +27,16 @@ class MainActivity : AppCompatActivity() {
         events.add(event)
 
 
-//        val a = Calendar.getInstance()
-//        a.set(Calendar.HOUR_OF_DAY, 16)
-//        a.set(Calendar.MINUTE, 0)
-//        val b = timeStart.clone() as Calendar
-//        b.set(Calendar.HOUR_OF_DAY, 17)
-//        b.set(Calendar.MINUTE, 0)
-//        val event1 = Event(1, a, b, "Event", "Hockaido",
-//                color = ContextCompat.getColor(this, R.color.blue_55))
-//
-//        events.add(event1)
+        val a = Calendar.getInstance()
+        a.set(Calendar.HOUR_OF_DAY, 8)
+        a.set(Calendar.MINUTE, 0)
+        val b = timeStart.clone() as Calendar
+        b.set(Calendar.HOUR_OF_DAY, 9)
+        b.set(Calendar.MINUTE, 0)
+        val event1 = Event(1, a, b, "Event", "Hockaido",
+                color = ContextCompat.getColor(this, R.color.blue_55))
+
+        events.add(event1)
 
         calendarView?.setEvent(events)
     }

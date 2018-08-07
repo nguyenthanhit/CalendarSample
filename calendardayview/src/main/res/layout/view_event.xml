@@ -2,45 +2,33 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/eventContainer"
     android:layout_width="match_parent"
-    android:clickable="false"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/gray"
+    android:clickable="true"
+    android:focusable="true">
 
     <TextView
         android:id="@+id/tvEvent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/ivTopArrow"
-        android:gravity="top|start"
         android:layout_marginTop="-16dp"
         android:background="@color/blue_55"
+        android:gravity="top|start"
         android:padding="@dimen/small_margin"
         android:textColor="@color/white"
-        android:textSize="@dimen/medium_text_size"
-        />
+        android:textSize="@dimen/medium_text_size" />
 
     <ImageView
         android:id="@+id/ivTopArrow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/smallest_padding"
-        android:paddingStart="@dimen/small_padding"
-        android:paddingEnd="@dimen/small_padding"
-        android:paddingTop="@dimen/small_padding"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/ic_arrow_up"
-        />
+        style="@style/ArrowStyle"
+        android:src="@drawable/ic_arrow_up" />
 
     <ImageView
         android:id="@+id/ivDownArrow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="-18dp"
+        style="@style/ArrowStyle"
         android:layout_below="@id/tvEvent"
-        android:paddingBottom="@dimen/smallest_padding"
-        android:paddingStart="@dimen/small_padding"
-        android:paddingEnd="@dimen/small_padding"
-        android:paddingTop="@dimen/small_padding"
+        android:layout_marginTop="-18dp"
         android:src="@drawable/ic_arrow_down" />
 
 </RelativeLayout>

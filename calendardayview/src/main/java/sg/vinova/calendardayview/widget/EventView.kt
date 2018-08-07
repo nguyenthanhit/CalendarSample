@@ -2,13 +2,11 @@ package sg.vinova.calendardayview.widget
 
 import android.content.Context
 import android.graphics.Rect
+import android.support.v4.content.ContextCompat
+import android.support.v4.view.GestureDetectorCompat
 import android.util.AttributeSet
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.MotionEvent
-import android.view.ViewGroup
+import android.view.*
 import android.widget.FrameLayout
-import android.widget.RelativeLayout
 import kotlinx.android.synthetic.main.view_event.view.*
 import sg.vinova.calendardayview.R
 import sg.vinova.calendardayview.event.IEvent
@@ -24,6 +22,7 @@ class EventView : FrameLayout {
     private lateinit var mEvent: Event
     private lateinit var params: FrameLayout.LayoutParams
     private lateinit var eventListener: IEvent
+    private var mDetector: GestureDetectorCompat? = null
     private var dy = 0f
 
     constructor(context: Context?, eventListener: IEvent) : super(context) {
@@ -42,17 +41,25 @@ class EventView : FrameLayout {
     private fun init() {
         params = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT)
-
+        mDetector = GestureDetectorCompat(context, EventGestureListener())
         LayoutInflater.from(context).inflate(R.layout.view_event, this, true)
 
-        eventContainer.setOnTouchListener { view, motionEvent ->
-            when (motionEvent.action) {
+        setOnClickListener {
+            showArrowButton(false)
+            isClickable = false
+        }
+
+        eventContainer.setOnTouchListener { _, motionEvent ->
+            // set parent's click to prevent show "add event view"
+            this@EventView.isClickable = true
+            mDetector!!.onTouchEvent(motionEvent)
+            when (motionEvent?.action) {
                 MotionEvent.ACTION_DOWN -> {
                     eventListener.onBeginMoveEvent()
-                    dy = view.y - motionEvent.rawY
+                    dy = eventContainer.y - motionEvent.rawY
                 }
                 MotionEvent.ACTION_MOVE -> {
-                    view.animate()
+                    eventContainer.animate()
                             .y(motionEvent.rawY + dy)
                             .setDuration(0)
                             .start()
@@ -64,8 +71,7 @@ class EventView : FrameLayout {
             true
         }
 
-        ivDownArrow.setOnTouchListener { view, motionEvent ->
-
+        ivDownArrow.setOnTouchListener { _, motionEvent ->
             val y = motionEvent.rawY
             val location = IntArray(2)
             tvEvent.getLocationOnScreen(location)
@@ -75,7 +81,7 @@ class EventView : FrameLayout {
                             y - totalEventY >= 50 && y - totalEventY > 0)) {
                 when (motionEvent.action) {
                     MotionEvent.ACTION_MOVE -> {
-                       // update height event
+                        // update height event
                         tvEvent.layoutParams.height += (y - totalEventY).toInt()
                         tvEvent.requestLayout()
                     }
@@ -88,12 +94,12 @@ class EventView : FrameLayout {
         }
 
         ivTopArrow.setOnTouchListener { view, motionEvent ->
-            Log.d("Thanh", "Up up up up ")
             true
         }
     }
 
     fun setPosition(rect: Rect) {
+        // set position parent view
         params.height = ViewGroup.LayoutParams.MATCH_PARENT
         params.leftMargin = rect.left
         layoutParams = params
@@ -111,6 +117,22 @@ class EventView : FrameLayout {
             (layoutParams as FrameLayout.LayoutParams).apply {
                 this.topMargin = rect.top - ScreenUtils.dpToPx(24)
             }
+        }
+    }
+
+    private fun showArrowButton(isShowView: Boolean) {
+        if (isShowView) {
+            ivTopArrow.visibility = View.VISIBLE
+            ivDownArrow.visibility = View.VISIBLE
+        } else {
+            ivTopArrow.visibility = View.INVISIBLE
+            ivDownArrow.visibility = View.INVISIBLE
+        }
+    }
+
+    inner class EventGestureListener : GestureDetector.SimpleOnGestureListener() {
+        override fun onLongPress(motionEvent: MotionEvent?) {
+            showArrowButton(true)
         }
     }
 }
